@@ -1,36 +1,124 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Фазерэс Грейв 5на5 - Frontend
 
-## Getting Started
+Telegram Mini App для капитанского драфта игроков в команды.
 
-First, run the development server:
+## Технологии
+
+- **Next.js 15** - React фреймворк
+- **TypeScript** - типизация
+- **Tailwind CSS** - стилизация
+- **Telegram Mini App SDK** - интеграция с Telegram
+
+## Установка и запуск
 
 ```bash
+# Установка зависимостей
+npm install
+
+# Запуск dev сервера
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Сборка для production
+npm run build
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Конфигурация
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Создайте файл `.env.local` в корне проекта:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```env
+NEXT_PUBLIC_API_URL=http://localhost:8000
+```
 
-## Learn More
+## Структура проекта
 
-To learn more about Next.js, take a look at the following resources:
+```
+captain-draft-front/
+├── app/
+│   ├── page.tsx              # Главная страница
+│   ├── layout.tsx            # Layout приложения
+│   └── lobby/
+│       └── [code]/
+│           └── page.tsx      # Страница лобби
+├── lib/
+│   ├── api.ts                # API клиент для бэкенда
+│   └── telegram.ts           # Утилиты для Telegram Mini App
+└── public/                   # Статические файлы
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Этапы разработки
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### ✅ ЭТАП 1: Базовая настройка и главная страница
+- [x] Создание Next.js проекта
+- [x] Настройка Telegram Mini App SDK
+- [x] Главная страница с красивым дизайном
+- [x] Форма создания/подключения к лобби
+- [x] API клиент
 
-## Deploy on Vercel
+### 🚧 ЭТАП 2: Страница лобби - базовый UI
+- [x] Отображение информации о лобби
+- [x] Список игроков без команды
+- [x] Список команд с игроками
+- [x] Определение роли пользователя
+- [ ] Функционал обновления данных
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### ⏳ ЭТАП 3: Функционал организатора
+- [ ] Создание команд
+- [ ] Назначение капитанов
+- [ ] Удаление игроков
+- [ ] Кнопка начать драфт
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### ⏳ ЭТАП 4: Драфт и функционал капитанов
+- [ ] Режим пиков
+- [ ] UI для капитанов
+- [ ] Отображение процесса драфта
+
+### ⏳ ЭТАП 5: Полировка
+- [ ] WebSocket для real-time
+- [ ] Улучшение UI/UX
+- [ ] Обработка ошибок
+- [ ] Оптимизация
+
+## Роли пользователей
+
+### Организатор
+- Создает лобби
+- Добавляет команды
+- Назначает капитанов
+- Удаляет игроков
+- Начинает драфт
+
+### Капитан
+- Выбирает игроков во время драфта
+
+### Игрок
+- Присоединяется к лобби
+- Ожидает выбора капитанами
+
+## API Endpoints (Backend)
+
+- `POST /add_player` - добавить игрока
+- `POST /create_lobby` - создать лобби
+- `POST /join_lobby` - присоединиться к лобби
+- `POST /create_team` - создать команду
+- `POST /add_player_to_team` - добавить игрока в команду
+
+## Статусы игроков
+
+- `inactive` - не в лобби
+- `out_of_team` - в лобби, но без команды
+- `leader` - капитан команды
+- `player` - игрок в команде
+
+## Telegram Mini App
+
+Приложение работает как Telegram Mini App и использует данные пользователя из `initData`:
+- `player.id` берется из `Telegram.WebApp.initDataUnsafe.user.id`
+- `player.name` берется из `Telegram.WebApp.initDataUnsafe.user.first_name`
+
+Для локальной разработки используются mock данные.
+
+## Дизайн
+
+Приложение адаптировано под мобильные телефоны с темной темой в фиолетово-розовых тонах.
