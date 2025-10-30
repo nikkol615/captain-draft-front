@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://h4o0k0w0wco44ksgggcwgk8c.194.147.95.202.sslip.io';
 
 export interface Player {
   id: number;
